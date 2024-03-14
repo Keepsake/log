@@ -8,62 +8,55 @@
       "generator": "Ninja Multi-Config"
     },
     {
-      "name": "ci",
+      "name": "coverage",
       "inherits": "default",
-      "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS_INIT": "--coverage -fsanitize=address"
+        "WITH_LINTER": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      },
+      "environment": {
+        "CXXFLAGS": "--coverage",
+        "LDFLAGS": "--coverage"
       }
     }
   ],
   "buildPresets": [
     {
-      "name": "release",
-      "displayName": "Release",
-      "configuration": "Release",
-      "configurePreset": "default"
+      "name": "default",
+      "configurePreset": "default",
+      "configuration": "Debug"
     },
     {
-      "name": "debug",
-      "displayName": "Debug",
-      "configuration": "Debug",
-      "configurePreset": "default"
-    },
-    {
-      "name": "ci",
-      "displayName": "CI",
-      "configuration": "Debug",
-      "configurePreset": "ci",
-      "targets": [
-        "all",
-        "test",
-        "ExperimentalCoverage"
-      ]
+      "name": "coverage",
+      "configurePreset": "coverage",
+      "configuration": "Debug"
     }
   ],
   "testPresets": [
     {
-      "name": "release",
-      "configurePreset": "default",
-      "configuration": "Release",
+      "name": "base",
+      "hidden": true,
       "output": {
         "outputOnFailure": true
-      }
+      },
+      "configuration": "Debug"
     },
     {
-      "name": "debug",
-      "configurePreset": "default",
-      "configuration": "Debug",
-      "output": {
-        "outputOnFailure": true
-      }
+      "name": "default",
+      "inherits": "base",
+      "configurePreset": "default"
+    },
+    {
+      "name": "coverage",
+      "inherits": "base",
+      "configurePreset": "coverage"
     }
-
   ],
   "workflowPresets": [
     {
-      "name": "release",
+      "name": "default",
       "steps": [
         {
           "type": "configure",
@@ -71,41 +64,28 @@
         },
         {
           "type": "build",
-          "name": "release"
-        },
-        {
-          "type": "test",
-          "name": "release"
-        }
-      ]
-    },
-    {
-      "name": "debug",
-      "steps": [
-        {
-          "type": "configure",
           "name": "default"
         },
         {
-          "type": "build",
-          "name": "debug"
-        },
-        {
           "type": "test",
-          "name": "debug"
+          "name": "default"
         }
       ]
     },
     {
-      "name": "ci",
+      "name": "coverage",
       "steps": [
         {
           "type": "configure",
-          "name": "ci"
+          "name": "coverage"
         },
         {
           "type": "build",
-          "name": "ci"
+          "name": "coverage"
+        },
+        {
+          "type": "test",
+          "name": "coverage"
         }
       ]
     }

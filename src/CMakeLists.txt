@@ -25,7 +25,7 @@ target_sources(
 target_compile_features(
   ks-log
   PUBLIC
-    cxx_std_11
+    cxx_std_17
 )
 
 target_link_libraries(

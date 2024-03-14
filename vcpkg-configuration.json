@@ -8,8 +8,8 @@
   "registries": [
     {
       "kind": "git",
-      "repository": "git@github.com:Keepsake/vcpkg.git",
-      "baseline": "92406b2bbf3825320dcc9ef002b991e8eeed5e84",
+      "repository": "https://github.com/Keepsake/vcpkg",
+      "baseline": "63390b82f2aded6d38786a92db89255dd59b8a47",
       "packages": [ "ks-*" ]
     }
   ]
