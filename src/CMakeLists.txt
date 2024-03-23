@@ -1,5 +1,4 @@
 add_library(ks-log
-  STATIC
   log.cpp
 )
 
@@ -7,6 +6,7 @@ target_include_directories(
   ks-log
   PUBLIC
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
+    "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>"
     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
@@ -18,8 +18,10 @@ target_sources(
         HEADERS
       BASE_DIRS
         ${PROJECT_SOURCE_DIR}/include/
+        ${PROJECT_BINARY_DIR}/include/
       FILES
         ${PROJECT_SOURCE_DIR}/include/ks/log.hpp
+        ${PROJECT_BINARY_DIR}/include/ks/log/detail/symbol_visibility.hpp
 )
 
 target_compile_features(

@@ -4,20 +4,22 @@
 
 #include <fmt/core.h>
 
+#include <ks/log/detail/symbol_visibility.hpp>
+
 namespace ks::log {
 
-extern std::FILE* out;
-extern std::FILE* err;
+KS_LOG_EXPORT extern std::FILE* out;
+KS_LOG_EXPORT extern std::FILE* err;
 
 namespace detail {
 
-void
+void KS_LOG_EXPORT
 log(std::FILE* const output,
     char const* level,
     fmt::string_view format,
     fmt::format_args args) noexcept;
 
-[[noreturn]] void
+[[noreturn]] void KS_LOG_EXPORT
 log_and_panic(std::FILE* const output,
               char const* level,
               fmt::string_view format,
