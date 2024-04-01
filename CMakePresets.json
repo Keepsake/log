@@ -6,31 +6,12 @@
       "binaryDir": "${sourceDir}/out/",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "generator": "Ninja Multi-Config"
-    },
-    {
-      "name": "coverage",
-      "inherits": "default",
-      "cacheVariables": {
-        "WITH_LINTER": {
-          "type": "BOOL",
-          "value": "ON"
-        }
-      },
-      "environment": {
-        "CXXFLAGS": "--coverage",
-        "LDFLAGS": "--coverage"
-      }
     }
   ],
   "buildPresets": [
     {
       "name": "default",
       "configurePreset": "default",
-      "configuration": "Debug"
-    },
-    {
-      "name": "coverage",
-      "configurePreset": "coverage",
       "configuration": "Debug"
     }
   ],
@@ -47,11 +28,6 @@
       "name": "default",
       "inherits": "base",
       "configurePreset": "default"
-    },
-    {
-      "name": "coverage",
-      "inherits": "base",
-      "configurePreset": "coverage"
     }
   ],
   "workflowPresets": [
@@ -69,23 +45,6 @@
         {
           "type": "test",
           "name": "default"
-        }
-      ]
-    },
-    {
-      "name": "coverage",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "coverage"
-        },
-        {
-          "type": "build",
-          "name": "coverage"
-        },
-        {
-          "type": "test",
-          "name": "coverage"
         }
       ]
     }
