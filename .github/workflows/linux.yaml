@@ -2,37 +2,4 @@ name: Linux
 on: push
 jobs:
   BuildTestAndReportCoverage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkoout
-        uses: actions/checkout@v4
-
-      - name: Install CMake
-        uses: lukka/get-cmake@latest
-
-      - name: Setup VCPKG
-        uses: lukka/run-vcpkg@v11.5
-
-      - name: Build and test
-        uses: lukka/run-cmake@v10
-        with:
-          workflowPreset: 'coverage'
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12.0'
-
-      - name: Install gcovr
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install gcovr
-
-      - name: Run gcovr
-        run: gcovr --filter src --filter include --coveralls coveralls.json
-
-      - name: Upload to coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          format: coveralls
-          file: coveralls.json
+    uses: Keepsake/gha-helpers/.github/workflows/linux.yaml@main
